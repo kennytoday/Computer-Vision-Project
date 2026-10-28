@@ -88,7 +88,7 @@ class VisionApp:
         cv2.destroyAllWindows()        # Close all OpenCV windows.
 
 
-########################################################
+###################################################
 
     # dis part only runs when you start this file directly
 #(not when another file imports it)
