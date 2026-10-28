@@ -1,77 +1,59 @@
 """
 detector.py
------------------------
-Face Detection Module
+Detects both Face Masks and Cigarettes using two YOLOv8 models
 """
 
 import cv2
 import os
 from datetime import datetime
+from ultralytics import YOLO
+os.environ["YOLO_VERBOSE"] = "False"
 
-# PLEASE INSTALL pip install opencv-python==4.12.0.88
+
 class FaceDetector:
 
     def __init__(self):
+        print("Loading models...")
 
-        cascade_path = cv2.data.haarcascades + "haarcascade_frontalface_default.xml"
+        # Load both models
+        # Change the filenames if your files have different names
+        self.mask_model = YOLO("mask_model.pt")        # your face mask model
+        self.cigarette_model = YOLO("cigarette.pt")    # your cigarette model
 
-        self.face_detector = cv2.CascadeClassifier(cascade_path)
-
-        if self.face_detector.empty():
-            raise Exception(f"Failed to load Haar Cascade.\nPath: {cascade_path}")
-
+        print("Models loaded.")
         os.makedirs("captures", exist_ok=True)
 
-    ###########################################################
-
     def detect(self, frame):
+        # Run both models
+        mask_results = self.mask_model(frame, verbose=False)
+        cig_results = self.cigarette_model(frame, verbose=False)
 
-        # Convert to grayscale
-        gray = cv2.cvtColor(
-            frame,
-            cv2.COLOR_BGR2GRAY
-        )
+        # Start with the original frame
+        annotated_frame = frame.copy()
 
-        # Detect faces
-        faces = self.face_detector.detectMultiScale(
-            gray,
-            scaleFactor=1.2,
-            minNeighbors=5,
-            minSize=(40, 40)
-        )
+        # Draw mask detections
+        annotated_frame = mask_results[0].plot(img=annotated_frame)
 
-        # Draw rectangles
-        for (x, y, w, h) in faces:
+        # Draw cigarette detections on top
+        annotated_frame = cig_results[0].plot(img=annotated_frame)
 
-            cv2.rectangle(
-                frame,
-                (x, y),
-                (x + w, y + h),
-                (0, 255, 0),
-                2
-            )
+        # Count total detections
+        mask_count = len(mask_results[0].boxes) if mask_results[0].boxes is not None else 0
+        cig_count = len(cig_results[0].boxes) if cig_results[0].boxes is not None else 0
 
-        # Display number of faces
         cv2.putText(
-            frame,
-            f"Faces: {len(faces)}",
+            annotated_frame,
+            f"Masks: {mask_count} | Cigarettes: {cig_count}",
             (10, 30),
             cv2.FONT_HERSHEY_SIMPLEX,
-            1,
+            0.8,
             (0, 255, 0),
             2
         )
 
-        return frame
-
-    ###########################################################
+        return annotated_frame
 
     def save_frame(self, frame):
-
-        filename = datetime.now().strftime(
-            "captures/%Y%m%d_%H%M%S.jpg"
-        )
-
+        filename = datetime.now().strftime("captures/%Y%m%d_%H%M%S.jpg")
         cv2.imwrite(filename, frame)
-
         return filename
