@@ -1,6 +1,6 @@
-Computer Vision Project: Real-Time Object Detection Using YOLOv8 and OpenCV
+**Computer Vision Project: Real-Time Object Detection Using YOLOv8 and OpenCV**
 
-1. Project Overview
+1. **Project Overview**
 
 This project is a Python-based computer vision application that uses deep learning to detect face masks and cigarettes through a webcam.
 
@@ -8,7 +8,7 @@ I developed the application using YOLOv8 and OpenCV, integrating two separately 
 
 The project gave me practical experience in working with trained computer vision models and understanding how object detection can be incorporated into a functional Python application.
 
-2. Background and Motivation
+2. **Background and Motivation**
 
 I became interested in computer vision because of its ability to help computers interpret visual information and recognise objects in their surroundings.
 
@@ -18,19 +18,20 @@ I chose face-mask and cigarette detection as two different object recognition ta
 
 My interest also extends to the potential use of computer vision in healthcare environments, particularly environmental safety and infection prevention. This project provided an initial opportunity to explore some of the underlying technologies that could support such applications.
 
-3. Project Objectives
+3. **Project Objectives**
 
 The main objectives were to:
 
-- Gain practical experience with computer vision and object detection.
-- Work with YOLOv8 models for identifying specific objects.
-- Use OpenCV to capture and process webcam video.
-- Integrate two independently trained detection models into one application.
-- Display detected objects and their counts on live video frames.
-- Allow users to capture and save processed images.
-- Understand the practical challenges and limitations of automated visual recognition.
+•	Gain practical experience with computer vision and object detection.
+•	Work with YOLOv8 models for identifying specific objects.
+•	Use OpenCV to capture and process webcam video.
+•	Integrate two independently trained detection models into one application.
+•	Display detected objects and their counts on live video frames.
+•	Allow users to capture and save processed images.
+•	Understand the practical challenges and limitations of automated visual recognition.
 
-4. Technologies and Tools
+
+4. **Technologies and Tools**
 
 Technology| How it was used
 Python| Application development
@@ -39,7 +40,7 @@ OpenCV| Webcam access, frame processing and image display
 Roboflow| Dataset preparation and model workflow
 PyTorch| Deep learning framework used by the Ultralytics models
 
-5. How the Application Works
+5. **How the Application Works**
 
 The application brings together two YOLOv8 models, each responsible for a different detection task.
 
@@ -61,25 +62,25 @@ The main processing sequence is:
 6. The annotated frame is displayed with detection counts.
 7. The user can continue monitoring, save an image or close the application.
 
-6. Dataset Preparation and Model Development
+6. **Dataset Preparation and Model Development**
 
 I used Roboflow as part of the dataset preparation and model development workflow.
 
 The original project documentation records approximately:
 
-- 800 images for the face-mask detection task.
-- 500 images for the cigarette detection task.
+•	800 images for the face-mask detection task.
+•	500 images for the cigarette detection task.
 
 The datasets provided the visual examples used in developing the respective detection models. The resulting model weights were exported in PyTorch format and integrated into the Python application.
 
 The two trained model files are:
 
-- "mask_model.pt"
-- "cigarette.pt"
+•	"mask_model.pt"
+•	"cigarette.pt"
 
 Using separate models allowed me to combine two object detection tasks without having to develop a single model covering both categories.
 
-7. Application Features
+7. **Application Features**
 
 The application includes the following functionality:
 
@@ -108,13 +109,13 @@ Keyboard controls
 - Press "C" to save the current processed frame.
 - Press "Q" to close the application.
 
-8. Application Screenshot
+8. **Application Screenshot**
 
 The screenshot below shows the application's visual interface.
 
-"Computer Vision Application Screenshot" (./Screenshot%20(41).png)
+"Computer Vision Application Screenshot" ![Image](<Screenshot (41)-1.png>)
 
-9. Repository Structure
+9. **Repository Structure**
 
 Computer-Vision-Project/
 │
@@ -139,7 +140,7 @@ Main Python Files
 
 The repository also contains the trained model weights and additional supporting Python files.
 
-10. Installation and Running the Application
+10. **Installation and Running the Application**
 
 Requirements
 
@@ -167,7 +168,7 @@ The application should open the webcam and begin processing video frames.
 
 Press "C" to save an image or "Q" to exit.
 
-11. Testing and Observations
+11. **Testing and Observations**
 
 I tested the application using webcam input to observe how the two models performed when processing live video frames.
 
@@ -183,7 +184,7 @@ Some factors that can affect detection include:
 
 The application demonstrates the integration of two object detection models into a working webcam-based system. However, I have not established a formal benchmark of its accuracy or real-world detection performance.
 
-12. Limitations
+12. **Limitations**
 
 Although the application provides a practical demonstration of object detection, there are limitations to consider.
 
@@ -193,7 +194,7 @@ The application also depends on the availability of a working webcam and suffici
 
 The system has not been developed or validated for clinical use, workplace enforcement or automated decision-making.
 
-13. Future Development: IntelliVision AI
+13. **Future Development: IntelliVision AI**
 
 This project has contributed to my interest in developing more practical computer vision applications.
 
@@ -203,7 +204,7 @@ Potential areas of exploration include identifying environmental hazards, suppor
 
 This is a future development direction rather than an existing healthcare product. Any application in a clinical environment would require further development, appropriate testing, privacy safeguards and engagement with healthcare professionals.
 
-14. What I Learned
+14. **What I Learned**
 
 Working on this project helped me develop a better understanding of how computer vision models can be integrated into practical applications.
 
