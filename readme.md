@@ -1,257 +1,234 @@
-AI-Powered Fraud Detection System Using Machine Learning
+Computer Vision Project: Real-Time Object Detection Using YOLOv8 and OpenCV
 
 1. Project Overview
 
-The AI-Powered Fraud Detection System is an independent machine learning project exploring how artificial intelligence can be applied to identifying potentially fraudulent financial transactions.
+This project is a Python-based computer vision application that uses deep learning to detect face masks and cigarettes through a webcam.
 
-The project uses a Random Forest classification model to analyse transaction-related information and estimate whether a transaction may represent legitimate or potentially fraudulent activity.
+I developed the application using YOLOv8 and OpenCV, integrating two separately trained object detection models into a single detection workflow. The application processes live camera frames, identifies objects recognised by the models, displays detection results and allows images to be saved for later review.
 
-The application provides an experimental environment for understanding how machine learning can support financial transaction monitoring and risk identification.
-
-The project was developed using Python and associated machine learning technologies, with an application interface for interacting with the prediction system.
+The project gave me practical experience in working with trained computer vision models and understanding how object detection can be incorporated into a functional Python application.
 
 2. Background and Motivation
 
-The increasing use of digital banking, electronic payments and online financial services has created opportunities for faster and more accessible financial transactions.
+I became interested in computer vision because of its ability to help computers interpret visual information and recognise objects in their surroundings.
 
-However, the growth of digital financial activity also creates challenges around identifying suspicious transactions and managing financial fraud risks.
+I wanted to move beyond learning machine learning concepts theoretically and gain practical experience in building an application that could process real-time visual input.
 
-Traditional approaches may depend on predefined rules and manual investigation. Machine learning offers another approach by analysing transaction characteristics and identifying patterns that may be associated with fraudulent activity.
+I chose face-mask and cigarette detection as two different object recognition tasks. Both provided an opportunity to understand how trained models identify visual patterns and how their predictions can be presented through an application.
 
-I developed this project to gain practical experience in applying supervised machine learning techniques to a financial technology challenge.
+My interest also extends to the potential use of computer vision in healthcare environments, particularly environmental safety and infection prevention. This project provided an initial opportunity to explore some of the underlying technologies that could support such applications.
 
-It also provided an opportunity to explore how predictive models can be integrated into software applications to make machine learning outputs more accessible to users.
-
-3. Problem Identification
-
-Financial transactions can vary considerably in their characteristics, making it challenging to identify potentially fraudulent activity through simple observation alone.
-
-This project explores the use of machine learning classification to distinguish between two transaction categories:
-
-- Legitimate transactions.
-- Potentially fraudulent transactions.
-
-The system analyses available transaction features and uses a trained classification model to generate a prediction.
-
-The objective is to demonstrate how data-driven approaches can support preliminary fraud-risk identification.
-
-4. Project Objectives
+3. Project Objectives
 
 The main objectives were to:
 
-1. Explore the application of machine learning to financial fraud detection.
-2. Understand supervised learning and binary classification.
-3. Prepare transaction-related data for model development.
-4. Implement a Random Forest classification model.
-5. Develop an application that accepts transaction information and returns model predictions.
-6. Explore how machine learning outputs can be presented through a user interface.
-7. Understand the limitations of synthetic datasets and experimental fraud detection models.
+- Gain practical experience with computer vision and object detection.
+- Work with YOLOv8 models for identifying specific objects.
+- Use OpenCV to capture and process webcam video.
+- Integrate two independently trained detection models into one application.
+- Display detected objects and their counts on live video frames.
+- Allow users to capture and save processed images.
+- Understand the practical challenges and limitations of automated visual recognition.
 
-5. Technologies and Tools
+4. Technologies and Tools
 
-Technology| Application
-Python| Main programming language
-Pandas| Data manipulation and analysis
-NumPy| Numerical operations
-Scikit-learn| Machine learning and model development
-Random Forest| Classification algorithm
-Streamlit| Application interface, if used in the current implementation
-Matplotlib / Seaborn| Data visualisation, where applicable
+Technology| How it was used
+Python| Application development
+YOLOv8 (Ultralytics)| Object detection
+OpenCV| Webcam access, frame processing and image display
+Roboflow| Dataset preparation and model workflow
+PyTorch| Deep learning framework used by the Ultralytics models
 
-6. Dataset and Data Preparation
+5. How the Application Works
 
-The project uses a synthetic financial transaction dataset for development and experimentation.
+The application brings together two YOLOv8 models, each responsible for a different detection task.
 
-Synthetic data provides a controlled environment for exploring machine learning workflows without using real banking customer information.
+Face-mask detection: The first model analyses camera frames to identify face-mask-related objects.
 
-The dataset is prepared for classification by identifying the relevant input features and target variable.
+Cigarette detection: The second model analyses the same frames to identify cigarette-related objects.
 
-The data preparation process includes:
+Both models process each captured frame. Their detection results are drawn onto the original image, allowing the application to display the combined results in one window.
 
-- Loading and inspecting the transaction dataset.
-- Identifying relevant transaction attributes.
-- Preparing input features and the target classification.
-- Splitting the data into training and testing subsets.
-- Preparing the data for model training and evaluation.
+The application also displays the number of detections returned by each model.
 
-Important: The synthetic dataset does not necessarily represent the complexity, distribution or behaviour of real-world financial fraud.
+The main processing sequence is:
 
-7. Machine Learning Implementation
+1. The application opens the computer's default webcam.
+2. OpenCV captures a video frame.
+3. The frame is passed to the face-mask detection model.
+4. The same frame is passed to the cigarette detection model.
+5. Both sets of results are drawn onto the image.
+6. The annotated frame is displayed with detection counts.
+7. The user can continue monitoring, save an image or close the application.
 
-7.1 Random Forest Classification
+6. Dataset Preparation and Model Development
 
-Random Forest was selected as the classification algorithm for this project.
+I used Roboflow as part of the dataset preparation and model development workflow.
 
-It is an ensemble learning method that combines predictions from multiple decision trees to produce a final classification.
+The original project documentation records approximately:
 
-In this application, the model learns patterns from the prepared transaction dataset and uses those patterns to classify new transaction inputs.
+- 800 images for the face-mask detection task.
+- 500 images for the cigarette detection task.
 
-7.2 Model Training
+The datasets provided the visual examples used in developing the respective detection models. The resulting model weights were exported in PyTorch format and integrated into the Python application.
 
-The development workflow involves:
+The two trained model files are:
 
-1. Preparing the dataset.
-2. Separating input features from the target variable.
-3. Splitting the dataset into training and testing data.
-4. Training the Random Forest classifier.
-5. Evaluating the trained model using appropriate classification metrics.
-6. Integrating the model into the application.
+- "mask_model.pt"
+- "cigarette.pt"
 
-7.3 Transaction Prediction
+Using separate models allowed me to combine two object detection tasks without having to develop a single model covering both categories.
 
-When transaction information is entered into the application, the trained model processes the input features and generates a prediction.
+7. Application Features
 
-The prediction indicates whether the transaction is classified as legitimate or potentially fraudulent according to the patterns learned from the training data.
+The application includes the following functionality:
 
-The output is intended to demonstrate the model's classification capability rather than establish that a transaction is genuinely fraudulent.
+Live webcam detection
 
-8. Application Features
+Captures video from the computer's default webcam and processes frames continuously.
 
-The application explores the following functionality:
+Multiple object detection
 
-- Accepting transaction-related input information.
-- Processing inputs through a trained machine learning model.
-- Generating transaction classification predictions.
-- Presenting prediction results through an application interface.
-- Supporting experimentation with different transaction inputs.
+Runs the face-mask and cigarette detection models on the same video frame.
 
-Add screenshots of the actual application here to demonstrate the implemented functionality.
+Visual detection results
+
+Displays model-generated bounding boxes and labels around detected objects.
+
+Detection counts
+
+Shows the number of detections returned by each model.
+
+Image capture
+
+Allows the user to save an annotated frame for later inspection.
+
+Keyboard controls
+
+- Press "C" to save the current processed frame.
+- Press "Q" to close the application.
+
+8. Application Screenshot
+
+The screenshot below shows the application's visual interface.
+
+"Computer Vision Application Screenshot" (./Screenshot%20(41).png)
 
 9. Repository Structure
 
-The repository contains the machine learning implementation, application components and supporting resources.
-
-Confirm the exact filenames and folder structure before finalising this section.
-
-AI_Fraud_Detection/
+Computer-Vision-Project/
 │
 ├── app.py
-├── model/
-│   └── trained model files
+├── detector.py
+├── camera.py
+├── detector_xml.py
+├── utils.py
 │
-├── data/
-│   └── synthetic dataset
+├── mask_model.pt
+├── cigarette.pt
+├── yolov8n.pt
 │
-├── notebooks/
-│   └── analysis and experimentation
-│
-├── requirements.txt
-├── README.md
-└── other project files
+├── Screenshot (41).png
+└── readme.md
 
-10. Installation and Setup
+Main Python Files
 
-Prerequisites
+- "app.py": Main application entry point. Opens the webcam, reads video frames, calls the detection component and displays the processed output.
+- "detector.py": Loads the two YOLOv8 models, performs object detection, combines the results and saves captured images.
+- "camera.py": Contains a separate webcam utility for opening the camera, reading frames and releasing the camera resource. The main application currently handles webcam access directly.
 
-- Python 3.10 or a compatible version.
-- pip package manager.
-- Git.
+The repository also contains the trained model weights and additional supporting Python files.
 
-Clone the repository
+10. Installation and Running the Application
 
-git clone https://github.com/kennytoday/AI_Fraud_Detection.git
-cd AI_Fraud_Detection
+Requirements
 
-Create a virtual environment
+- Python installed on your computer.
+- A working webcam.
+- An internet connection for installing the required Python packages.
 
-python -m venv venv
+Step 1: Clone the repository
 
-Activate the environment:
+git clone https://github.com/kennytoday/Computer-Vision-Project.git
 
-Windows:
+Step 2: Open the project directory
 
-venv\Scripts\activate
+cd Computer-Vision-Project
 
-Linux/macOS:
+Step 3: Install dependencies
 
-source venv/bin/activate
+pip install ultralytics opencv-python
 
-Install dependencies
+Step 4: Run the application
 
-pip install -r requirements.txt
+python app.py
 
-Run the application
+The application should open the webcam and begin processing video frames.
 
-If the application entry point is Streamlit:
+Press "C" to save an image or "Q" to exit.
 
-streamlit run app.py
+11. Testing and Observations
 
-Confirm that app.py is the actual entry point before publishing this instruction.
+I tested the application using webcam input to observe how the two models performed when processing live video frames.
 
-11. Model Evaluation
+The testing helped me understand the importance of model quality, image conditions and the relationship between object detection and real-time video processing.
 
-Model evaluation is an important part of understanding the effectiveness of a fraud detection classifier.
+Some factors that can affect detection include:
 
-The following metrics are relevant to this project:
+- Lighting conditions and image quality.
+- Distance between the camera and the object.
+- Object visibility and positioning.
+- Similar-looking objects in the background.
+- The quality and variety of images used during model development.
 
-- Accuracy: Overall proportion of correctly classified transactions.
-- Precision: Proportion of transactions predicted as fraudulent that are actually labelled fraudulent in the test dataset.
-- Recall: Proportion of fraudulent-labelled transactions correctly identified by the model.
-- F1-score: Balance between precision and recall.
-- Confusion Matrix: Breakdown of correct and incorrect classifications.
+The application demonstrates the integration of two object detection models into a working webcam-based system. However, I have not established a formal benchmark of its accuracy or real-world detection performance.
 
-For fraud detection, precision and recall are particularly important because false positives and false negatives have different operational consequences.
+12. Limitations
 
-Actual evaluation results should be documented using the model's verified test outputs.
+Although the application provides a practical demonstration of object detection, there are limitations to consider.
 
-Because the dataset is synthetic, these results should not be interpreted as evidence of real-world banking fraud detection effectiveness.
+The quality of detection depends on the training data and the conditions under which images are captured. Objects that are partially hidden, poorly illuminated or visually different from the training examples may not be recognised correctly.
 
-12. Limitations and Considerations
+The application also depends on the availability of a working webcam and sufficient computing resources to process video frames.
 
-This project is an independent machine learning development exercise and has several limitations:
+The system has not been developed or validated for clinical use, workplace enforcement or automated decision-making.
 
-- The model was developed using synthetic transaction data.
-- Synthetic patterns may not reflect real financial fraud behaviour.
-- The model may not generalise to actual banking environments.
-- False positives may incorrectly flag legitimate transactions.
-- False negatives may fail to identify suspicious transactions.
-- The project does not integrate with live banking systems.
-- The model has not been independently validated for financial institution deployment.
+13. Future Development: IntelliVision AI
 
-The system should therefore be viewed as an experimental demonstration of machine learning classification rather than an operational fraud prevention solution.
+This project has contributed to my interest in developing more practical computer vision applications.
 
-13. Future Development
+My longer-term vision is to explore IntelliVision AI, an idea focused on investigating how computer vision could support environmental safety and monitoring in healthcare settings.
 
-Potential future improvements include:
+Potential areas of exploration include identifying environmental hazards, supporting infection-prevention activities and providing visual information that may assist healthcare professionals.
 
-- Exploring larger and more representative transaction datasets.
-- Comparing Random Forest with other classification algorithms.
-- Investigating class imbalance and appropriate resampling techniques.
-- Improving model explainability and feature importance analysis.
-- Introducing more detailed model evaluation.
-- Exploring real-time transaction processing.
-- Investigating model monitoring and performance drift.
-- Exploring secure integration with financial transaction monitoring systems.
+This is a future development direction rather than an existing healthcare product. Any application in a clinical environment would require further development, appropriate testing, privacy safeguards and engagement with healthcare professionals.
 
-Any future use with real financial data would require appropriate data protection, security, governance and validation measures.
+14. What I Learned
 
-14. Learning Outcomes and Technical Contribution
+Working on this project helped me develop a better understanding of how computer vision models can be integrated into practical applications.
 
-Through this project, I developed practical experience in:
+In particular, I gained experience in:
 
-- Supervised machine learning.
-- Binary classification.
-- Random Forest model development.
-- Transaction data preparation.
-- Model training and evaluation.
-- Python application development.
-- Integrating machine learning models into application interfaces.
-- Understanding the challenges of financial fraud detection.
+- Working with YOLOv8 object detection models.
+- Processing live video using OpenCV.
+- Loading and integrating trained PyTorch model weights.
+- Combining outputs from multiple detection models.
+- Displaying bounding boxes, labels and detection counts.
+- Handling webcam input and saving processed images.
+- Recognising the limitations of model predictions in different environments.
 
-My contribution included project design, machine learning implementation, application interface development, testing and integration.
+It also strengthened my interest in applying AI and computer vision to practical challenges, particularly those connected to healthcare technology.
 
 15. Disclaimer
 
-This project is an independent educational and technical development exercise.
+This project is an independent technical development and learning exercise. Its detection results are experimental and should not be treated as definitive evidence of an individual's behaviour, infection status or compliance with safety requirements.
 
-It is not a production-ready banking fraud detection system and has not been validated using live financial transaction data.
+It is not a clinically validated or approved healthcare monitoring system.
 
-Predictions generated by the application should not be used as the sole basis for financial decisions or fraud investigations.
-
-16. Author
+Author
 
 Kehinde Oni
 
 GitHub: https://github.com/kennytoday
 
-This project reflects my ongoing interest in artificial intelligence, machine learning and the application of predictive technologies to real-world financial technology challenges.
+Project repository: https://github.com/kennytoday/Computer-Vision-Project
